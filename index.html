@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Studio — Story & Strategy</title>
+  <meta name="description" content="Story is the human operating system. Paired with strategic visual language, it creates leverage for small businesses and nonprofits." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <main class="page">
+
+    <!-- Top meta bar -->
+    <header class="topbar">
+      <span class="meta">EST. 2005</span>
+      <span class="meta meta--center">— STUDIO —</span>
+      <span class="meta meta--right">SAN DIEGO, CA</span>
+    </header>
+
+    <!-- Logo -->
+    <section class="logo-section">
+      <img src="logo.png" alt="Studio logo" class="logo" />
+    </section>
+
+    <!-- Manifesto -->
+    <section class="manifesto" aria-labelledby="manifesto-label">
+      <div class="label-row">
+        <span class="hairline"></span>
+        <span id="manifesto-label" class="label">001 — Manifesto</span>
+        <span class="hairline"></span>
+      </div>
+
+      <div class="manifesto-body">
+        <p class="lede">
+          Story is the original technology. The human operating system. Long before
+          the slide deck, the website, or the brand guide, we were sitting around fires
+          making sense of the world by telling each other what happened.
+        </p>
+
+        <p>
+          We pair the timeless principles of story with a strategic visual language —
+          and we use that combination to give small businesses and nonprofits the
+          kind of leverage usually reserved for companies a hundred times their size.
+        </p>
+
+        <p>
+          Two decades in, the work has only gotten clearer: tell the truth, tell it
+          well, and make it impossible to ignore. We're here to help good people
+          make a better world — and to make sure the world actually notices.
+        </p>
+      </div>
+    </section>
+
+    <!-- Media slot -->
+    <section class="media" aria-labelledby="media-label">
+      <div class="label-row">
+        <span class="hairline"></span>
+        <span id="media-label" class="label">002 — In motion</span>
+        <span class="hairline"></span>
+      </div>
+
+      <figure class="media-frame">
+        <video
+          class="media-video"
+          autoplay
+          loop
+          muted
+          playsinline
+          poster="media-poster.jpg"
+        >
+          <source src="media.mp4" type="video/mp4" />
+          <!-- Fallback image if browser can't play the mp4 -->
+          <img src="media-poster.jpg" alt="" class="media-fallback" />
+        </video>
+        <figcaption class="media-caption">
+          <span class="caption-tick">↳</span>
+          <span>Selected work, in loop.</span>
+        </figcaption>
+      </figure>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact" aria-labelledby="contact-label">
+      <div class="label-row">
+        <span class="hairline"></span>
+        <span id="contact-label" class="label">003 — Say hello</span>
+        <span class="hairline"></span>
+      </div>
+
+      <p class="contact-intro">
+        If you have something worth telling — a business, a cause, a beginning —
+        we'd love to hear about it.
+      </p>
+
+      <!-- Replace the action URL with your Formspree endpoint after signing up at formspree.io -->
+      <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <div class="field">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required autocomplete="name" />
+        </div>
+
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required autocomplete="email" />
+        </div>
+
+        <div class="field">
+          <label for="message">Tell us a little</label>
+          <textarea id="message" name="message" rows="4" required></textarea>
+        </div>
+
+        <!-- Honeypot for spam bots -->
+        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+
+        <button type="submit" class="submit">
+          <span>Send →</span>
+        </button>
+
+        <p class="form-note">No mailing list. No follow-up sequence. Just a reply.</p>
+      </form>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <span class="meta">© <span id="year"></span></span>
+      <span class="meta meta--center">— END —</span>
+      <span class="meta meta--right">v1.0</span>
+    </footer>
+
+  </main>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
