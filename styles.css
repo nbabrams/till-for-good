@@ -48,7 +48,7 @@ video {
 }
 
 /* =========================================================
-   Subtle grain texture overlay (very low opacity)
+   Subtle grain overlay
    ========================================================= */
 .grain {
   position: fixed;
@@ -96,13 +96,8 @@ video {
   color: var(--muted);
 }
 
-.meta--center {
-  text-align: center;
-}
-
-.meta--right {
-  text-align: right;
-}
+.meta--center { text-align: center; }
+.meta--right { text-align: right; }
 
 /* =========================================================
    Logo
@@ -148,9 +143,7 @@ video {
 /* =========================================================
    Manifesto
    ========================================================= */
-.manifesto {
-  padding: 3rem 0;
-}
+.manifesto { padding: 3rem 0; }
 
 .manifesto-body {
   max-width: 38rem;
@@ -163,9 +156,7 @@ video {
   line-height: 1.65;
 }
 
-.manifesto-body p:last-child {
-  margin-bottom: 0;
-}
+.manifesto-body p:last-child { margin-bottom: 0; }
 
 .lede {
   font-size: 19px !important;
@@ -174,16 +165,12 @@ video {
   letter-spacing: -0.005em;
 }
 
-.lede::first-letter {
-  font-weight: 700;
-}
+.lede::first-letter { font-weight: 700; }
 
 /* =========================================================
    Media
    ========================================================= */
-.media {
-  padding: 3rem 0;
-}
+.media { padding: 3rem 0; }
 
 .media-frame {
   position: relative;
@@ -193,29 +180,47 @@ video {
   aspect-ratio: 16 / 10;
 }
 
-.media-video {
+.media-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
 }
 
-.media-fallback {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+/* Loading state — instant swap, no fade. While loading, dim slightly. */
+.media-frame.is-loading .media-image {
+  opacity: 0.35;
 }
 
-.media-caption {
+.media-loading {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent 0,
+    transparent 8px,
+    rgba(255, 255, 255, 0.03) 8px,
+    rgba(255, 255, 255, 0.03) 16px
+  );
+  opacity: 0;
+  transition: opacity 120ms ease;
+}
+
+.media-frame.is-loading .media-loading {
+  opacity: 1;
+}
+
+/* Controls row below the image */
+.media-controls {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.625rem;
   margin-top: 0.875rem;
   font-family: var(--font-mono);
   font-size: 11px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--muted);
 }
 
 .caption-tick {
@@ -223,12 +228,54 @@ video {
   color: var(--ink);
 }
 
+.media-caption {
+  color: var(--muted);
+  flex: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Refresh button — small monospace pill */
+.refresh-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid var(--ink);
+  padding: 0.5rem 0.875rem;
+  cursor: pointer;
+  transition: background 150ms ease, color 150ms ease;
+}
+
+.refresh-btn:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.refresh-btn:active {
+  transform: translateY(1px);
+}
+
+.refresh-icon {
+  display: inline-block;
+  font-size: 13px;
+  line-height: 1;
+  transition: transform 400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.refresh-btn:hover .refresh-icon,
+.refresh-btn:active .refresh-icon {
+  transform: rotate(180deg);
+}
+
 /* =========================================================
    Contact
    ========================================================= */
-.contact {
-  padding: 3rem 0 1rem;
-}
+.contact { padding: 3rem 0 1rem; }
 
 .contact-intro {
   max-width: 32rem;
@@ -273,7 +320,7 @@ video {
   transition: border-color 200ms ease;
   resize: vertical;
   width: 100%;
-  border-radius: 0; /* iOS Safari */
+  border-radius: 0;
   -webkit-appearance: none;
 }
 
@@ -288,7 +335,6 @@ video {
   border-bottom-color: var(--ink);
 }
 
-/* Submit button */
 .submit {
   align-self: flex-start;
   font-family: var(--font-mono);
@@ -309,9 +355,7 @@ video {
   color: var(--ink);
 }
 
-.submit:active {
-  transform: translateY(1px);
-}
+.submit:active { transform: translateY(1px); }
 
 .form-note {
   font-family: var(--font-mono);
@@ -325,13 +369,8 @@ video {
    Responsive
    ========================================================= */
 @media (max-width: 540px) {
-  .logo-section {
-    padding: 3.5rem 0 3rem;
-  }
-
-  .logo {
-    max-width: 140px;
-  }
+  .logo-section { padding: 3.5rem 0 3rem; }
+  .logo { max-width: 140px; }
 
   .topbar,
   .footer {
@@ -339,31 +378,35 @@ video {
     gap: 0.5rem;
   }
 
-  .meta--center {
-    display: none;
+  .meta--center { display: none; }
+
+  .lede { font-size: 18px !important; }
+
+  .manifesto-body p { font-size: 16.5px; }
+
+  .media-controls {
+    flex-wrap: wrap;
+    gap: 0.5rem;
   }
 
-  .lede {
-    font-size: 18px !important;
+  .media-caption {
+    flex-basis: 100%;
+    order: 3;
   }
 
-  .manifesto-body p {
-    font-size: 16.5px;
+  .refresh-btn {
+    margin-left: auto;
   }
 }
 
 /* =========================================================
-   Reduced motion respect
+   Reduced motion
    ========================================================= */
 @media (prefers-reduced-motion: reduce) {
-  .media-video {
-    /* Pause autoplay videos for users who prefer reduced motion */
-    animation-play-state: paused;
-  }
-
   *,
   *::before,
   *::after {
     transition-duration: 0.01ms !important;
   }
+  .refresh-btn:hover .refresh-icon { transform: none; }
 }

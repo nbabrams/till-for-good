@@ -36,7 +36,7 @@
       </div>
 
       <div class="manifesto-body">
-        <p>
+        <p class="lede">
           Story is how humans have always made sense of the world.
         </p>
 
@@ -45,11 +45,12 @@
         </p>
 
         <p>
-          After twenty years of doing this work, we've watched what happens when good people get the right tools in their hands. The world gets a little better.
+          We love what happens when good people get the right tools in their hands. The world gets a little better.
+        </p>
       </div>
     </section>
 
-    <!-- Media slot -->
+    <!-- Media -->
     <section class="media" aria-labelledby="media-label">
       <div class="label-row">
         <span class="hairline"></span>
@@ -58,23 +59,18 @@
       </div>
 
       <figure class="media-frame">
-        <video
-          class="media-video"
-          autoplay
-          loop
-          muted
-          playsinline
-          poster="media-poster.jpg"
-        >
-          <source src="media.mp4" type="video/mp4" />
-          <!-- Fallback image if browser can't play the mp4 -->
-          <img src="media-poster.jpg" alt="" class="media-fallback" />
-        </video>
-        <figcaption class="media-caption">
-          <span class="caption-tick">↳</span>
-          <span>Selected work, in loop.</span>
-        </figcaption>
+        <img id="media-image" class="media-image" alt="Selected work" />
+        <div class="media-loading" aria-hidden="true"></div>
       </figure>
+
+      <div class="media-controls">
+        <span class="caption-tick">↳</span>
+        <span id="media-caption" class="media-caption">Loading…</span>
+        <button id="refresh-btn" class="refresh-btn" type="button" aria-label="Show another image">
+          <span class="refresh-label">Shuffle</span>
+          <span class="refresh-icon" aria-hidden="true">↻</span>
+        </button>
+      </div>
     </section>
 
     <!-- Contact -->
@@ -87,7 +83,7 @@
 
       <p class="contact-intro">
         If you have a story you need help telling,
-        we'd love to hear about it.
+        we'd love to connect.
       </p>
 
       <!-- Replace the action URL with your Formspree endpoint after signing up at formspree.io -->
@@ -121,14 +117,87 @@
     <!-- Footer -->
     <footer class="footer">
       <span class="meta">© <span id="year"></span></span>
-      <span class="meta meta--center">— THANK YOU —</span>
-      <span class="meta meta--right">J.15</span>
+      <span class="meta meta--center">— END —</span>
+      <span class="meta meta--right">v1.0</span>
     </footer>
 
   </main>
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // ====================================================
+    // Random image loader
+    // ====================================================
+    (function () {
+      const imgEl = document.getElementById('media-image');
+      const captionEl = document.getElementById('media-caption');
+      const btnEl = document.getElementById('refresh-btn');
+      const frameEl = imgEl.closest('.media-frame');
+
+      let images = [];
+      let lastIndex = -1;
+
+      function pickIndex() {
+        if (images.length <= 1) return 0;
+        let i;
+        do {
+          i = Math.floor(Math.random() * images.length);
+        } while (i === lastIndex);
+        lastIndex = i;
+        return i;
+      }
+
+      function showImage() {
+        if (!images.length) return;
+        const i = pickIndex();
+        const src = 'media/' + images[i];
+
+        frameEl.classList.add('is-loading');
+        captionEl.textContent = 'Loading…';
+
+        const next = new Image();
+        next.onload = function () {
+          imgEl.src = next.src;
+          captionEl.textContent =
+            String(i + 1).padStart(2, '0') + ' / ' +
+            String(images.length).padStart(2, '0');
+          frameEl.classList.remove('is-loading');
+        };
+        next.onerror = function () {
+          captionEl.textContent = 'Image failed to load.';
+          frameEl.classList.remove('is-loading');
+        };
+        next.src = src;
+      }
+
+      fetch('media/manifest.json', { cache: 'no-store' })
+        .then(function (r) {
+          if (!r.ok) throw new Error('Manifest not found');
+          return r.json();
+        })
+        .then(function (data) {
+          images = Array.isArray(data) ? data : (data.images || []);
+          if (!images.length) {
+            captionEl.textContent = 'No images yet.';
+            return;
+          }
+          showImage();
+        })
+        .catch(function () {
+          captionEl.textContent = 'Could not load image library.';
+        });
+
+      btnEl.addEventListener('click', showImage);
+
+      // Keyboard shortcut: press R to shuffle (unless typing in a form field)
+      document.addEventListener('keydown', function (e) {
+        if (e.key.toLowerCase() !== 'r') return;
+        const tag = (document.activeElement && document.activeElement.tagName) || '';
+        if (tag === 'INPUT' || tag === 'TEXTAREA') return;
+        showImage();
+      });
+    })();
   </script>
 </body>
 </html>
