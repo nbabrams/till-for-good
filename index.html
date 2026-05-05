@@ -59,19 +59,11 @@
       </div>
 
       <figure class="media-frame">
-        <img id="media-image" class="media-image" alt="Selected work" />
+        <img id="media-image" class="media-image" alt="Selected work" src="media/image01.jpg" />
         <div class="media-loading" aria-hidden="true"></div>
       </figure>
 
-      <div class="media-controls">
-        <span class="caption-tick">↳</span>
-        <span id="media-caption" class="media-caption">Loading…</span>
-        <button id="refresh-btn" class="refresh-btn" type="button" aria-label="Show another image">
-          <span class="refresh-label">Shuffle</span>
-          <span class="refresh-icon" aria-hidden="true">↻</span>
-        </button>
-      </div>
-    </section>
+   </section>
 
     <!-- Contact -->
     <section class="contact" aria-labelledby="contact-label">
@@ -148,8 +140,8 @@
         return i;
       }
 
-      function showImage() {
-        if (!images.length) return;
+Random image loader
+  if (!images.length) return;
         const i = pickIndex();
         const src = 'media/' + images[i];
 
