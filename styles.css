@@ -174,7 +174,7 @@ video {
 
 .media-frame {
   position: relative;
-  border: 1px solid var(--ink);
+  border: 0px solid var(--ink);
   background: var(--ink);
   overflow: hidden;
   aspect-ratio: 16 / 10;
