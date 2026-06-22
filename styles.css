@@ -153,7 +153,10 @@ video {
 /* =========================================================
    Manifesto
    ========================================================= */
-.manifesto { padding: 3rem 0; }
+.manifesto { padding: 3rem 0 1.25rem; }
+
+/* Even spacing above/below the manifesto text (001 ↔ 002) */
+.manifesto .label-row { margin-bottom: 4.25rem; }
 
 .manifesto-body {
   max-width: 38rem;
