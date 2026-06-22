@@ -99,6 +99,16 @@ video {
 .meta--center { text-align: center; }
 .meta--right { text-align: right; }
 
+.social { display: flex; justify-content: center; align-items: center; }
+
+.social-link {
+  display: inline-flex;
+  color: var(--muted);
+  transition: color 0.2s ease;
+}
+
+.social-link:hover { color: var(--ink, #1a1a1a); }
+
 /* =========================================================
    Logo
    ========================================================= */
@@ -372,13 +382,14 @@ video {
   .logo-section { padding: 3.5rem 0 3rem; }
   .logo { max-width: 140px; }
 
-  .topbar,
-  .footer {
+  .topbar {
     grid-template-columns: 1fr 1fr;
     gap: 0.5rem;
   }
 
-  .meta--center { display: none; }
+  .footer { gap: 0.5rem; }
+
+  .topbar .meta--center { display: none; }
 
   .lede { font-size: 18px !important; }
 
