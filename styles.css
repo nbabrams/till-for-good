@@ -103,11 +103,11 @@ video {
 
 .social-link {
   display: inline-flex;
-  color: var(--muted);
+  color: #757574;
   transition: color 0.2s ease;
 }
 
-.social-link:hover { color: var(--ink, #1a1a1a); }
+.social-link:hover { color: #5a5a59; }
 
 /* =========================================================
    Logo
