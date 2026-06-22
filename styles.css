@@ -107,7 +107,7 @@ video {
   transition: color 0.2s ease;
 }
 
-.social-link:hover { color: var(--ink, #1a1a1a); }
+.social-link:hover { color: #5a5a59; }
 
 /* =========================================================
    Logo
