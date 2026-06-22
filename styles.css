@@ -103,7 +103,7 @@ video {
 
 .social-link {
   display: inline-flex;
-  color: var(--muted);
+  color: #757574;
   transition: color 0.2s ease;
 }
 
